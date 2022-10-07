@@ -9,7 +9,7 @@ public class Envejecimiento extends Thread {
     @Override
     public void run() {
         while (!CargaReferencias.termino) {
-            ram.envejecimiento();
+            ram.envejecimiento(); // TODO: Hacer que el thread no se quede esperando.
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
