@@ -26,7 +26,7 @@ public class CargaReferencias extends Thread {
                 Thread.sleep(2); // Debe correr cada 2 milisegundos.
             }
         } catch (Exception e) {
-            System.err.println("No se encontró el archivo en la carpeta 'ej_paginas'!");
+            System.err.println("No se encontró el archivo '" + nombreArchivo + "' en la carpeta 'ej_paginas'!");
         }
 
     }
