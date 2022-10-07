@@ -64,16 +64,11 @@ public class RAM {
     }
 
     public synchronized void envejecimiento() {
-        while (cola.size() == 0) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if (cola.size() != 0) {
+            int referencia = cola.poll();
+            marcos[referencia] = -1;
+            notify();
         }
 
-        int referencia = cola.poll();
-        marcos[referencia] = -1;
-        notify();
     }
 }
