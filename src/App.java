@@ -20,6 +20,9 @@ public class App {
         TP tp = new TP(numMarcos, ram);
         TLB tlb = new TLB(numEntradas, tp);
         CargaReferencias cargaReferencias = new CargaReferencias(nombreArchivo, tlb);
+        Envejecimiento envejecimiento = new Envejecimiento(ram);
+        envejecimiento.start();
         cargaReferencias.start();
+
     }
 }

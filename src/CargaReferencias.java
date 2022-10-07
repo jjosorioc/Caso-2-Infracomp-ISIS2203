@@ -10,6 +10,8 @@ public class CargaReferencias extends Thread {
 
     private TLB tlb;
 
+    public static boolean termino = false;
+
     public CargaReferencias(String nombreArchivo, TLB tlb) {
         this.nombreArchivo = nombreArchivo;
         this.tlb = tlb;
@@ -30,11 +32,13 @@ public class CargaReferencias extends Thread {
 
                 Thread.sleep(2); // Debe correr cada 2 milisegundos.
             }
+            scanner.close();
+            CargaReferencias.termino = true;
+
         } catch (Exception e) {
-            //TODO: Arreglar método de TLB para evitar errores con los índices
-            e.printStackTrace();
             System.err.println("No se encontró el archivo '" + nombreArchivo + "' en la carpeta 'ej_paginas'!");
         }
+        System.out.println("Carga terminada");
 
     }
 

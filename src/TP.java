@@ -6,11 +6,9 @@ public class TP {
     public TP(int numMarcos, RAM ram) {
         this.ram = ram;
         for (int i = 0; i < array.length; i++) {
-            if (i < numMarcos) {
-                array[i] = i;
-            } else {
-                array[i] = -1;
-            }
+
+            array[i] = -1; // -1 Indica que no está en la RAM
+
         }
     }
 
@@ -24,20 +22,34 @@ public class TP {
         /**
          * Si la referencia está en la TP, se imprime el mensaje "Referencia encontrada
          * en
-         * la TP" y se termina la ejecución del método.
+         * la TP" y se retorna el marco de página.
          */
         if (array[referencia] != -1) {
             System.out.println("Referencia " + referencia + " encontrada en la TP");
-            RAM.repeticionesMarcos[array[referencia]]++;
             return array[referencia];
         }
 
         /**
-         * Si la referencia no está en la TP, se imprime el mensaje "Referencia no
-         * encontrada en la TP" y se procede a buscarla en la RAM.
+         * Ocurre un fallo de página, retorna el marco de página asignado
          */
-        System.out.println("Referencia " + referencia + " no encontrada en la TP");
-        int ubicacionFisica = ram.buscarReferencia(referencia);
-        return ubicacionFisica;
+        else {
+            System.out.println("Fallo de página con la referencia " + referencia);
+            int marcoPaginaNuevo = ram.agregarReferenciaVirtual(referencia);
+
+            /**
+             * Se elimina el marco de página de la TP
+             */
+            for (int i = 0; i < array.length; i++) {
+                if (array[i] == marcoPaginaNuevo) {
+                    TLB.tlb.remove(i);
+                    TLB.cola.remove(i);
+                    array[i] = -1;
+                    break;
+                }
+            }
+            array[referencia] = marcoPaginaNuevo;
+
+            return marcoPaginaNuevo;
+        }
     }
 }

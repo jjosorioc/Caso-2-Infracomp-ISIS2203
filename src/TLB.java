@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,12 +12,12 @@ public class TLB {
     /**
      * Permite saber si una dirección virtual está en la TLB.
      */
-    private HashMap<Integer, Integer> conjunto;
+    public static HashMap<Integer, Integer> tlb;
 
     /**
      * Cola para determinar qué dirección virtual debe ser reemplazada.
      */
-    private Queue<Integer> cola;
+    public static Queue<Integer> cola;
 
     private TP tp;
 
@@ -29,8 +28,8 @@ public class TLB {
      */
     public TLB(int numEntradas, TP tp) {
         this.numEntradas = numEntradas;
-        this.conjunto = new HashMap<>();
-        this.cola = new LinkedList<>();
+        TLB.tlb = new HashMap<>();
+        TLB.cola = new LinkedList<>();
         this.tp = tp;
     }
 
@@ -45,8 +44,8 @@ public class TLB {
          * en
          * la TLB" y se termina la ejecución del método.
          */
-        if (conjunto.containsKey(referencia)) {
-            RAM.repeticionesMarcos[conjunto.get(referencia)]++;
+        if (tlb.containsKey(referencia)) {
+
             System.out.println("Referencia " + referencia + " encontrada en la TLB");
             return;
         }
@@ -61,8 +60,8 @@ public class TLB {
         /**
          * Si la TLB no está llena, se agrega la referencia a la TLB.
          */
-        if (conjunto.size() < numEntradas) {
-            conjunto.put(referencia, ubicacionFisica);
+        if (tlb.size() < numEntradas) {
+            tlb.put(referencia, ubicacionFisica);
             cola.add(referencia);
         } else {
             /**
@@ -70,8 +69,8 @@ public class TLB {
              * referencia.
              */
             Integer referenciaAntigua = cola.poll();
-            conjunto.remove(referenciaAntigua);
-            conjunto.put(referencia, ubicacionFisica);
+            tlb.remove(referenciaAntigua);
+            tlb.put(referencia, ubicacionFisica);
             cola.add(referencia);
         }
     }
