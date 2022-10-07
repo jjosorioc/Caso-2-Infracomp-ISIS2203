@@ -22,7 +22,7 @@ public class CargaReferencias extends Thread {
             scanner = new Scanner(new File("src/ej_paginas/" + nombreArchivo));
             while (scanner.hasNextLine()) {
                 // TODO: Agregar las funciones que realiza este Thread.
-                
+
                 Thread.sleep(2); // Debe correr cada 2 milisegundos.
             }
         } catch (Exception e) {

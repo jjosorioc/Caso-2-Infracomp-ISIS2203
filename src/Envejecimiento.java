@@ -5,4 +5,9 @@ public class Envejecimiento extends Thread {
     public Envejecimiento(TLB tlb) {
         this.tlb = tlb;
     }
+
+    @Override
+    public void run() {
+
+    }
 }
