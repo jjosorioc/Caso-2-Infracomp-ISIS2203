@@ -11,6 +11,8 @@ public class App {
                 "Ingrese el nombre del archivo de las referencias (este se debe encontrar en la carpeta ej_paginas: ");
         String nombreArchivo = sc.nextLine();
 
+        sc.close();
+
         /**
          * Crear los objetos
          */
