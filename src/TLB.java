@@ -51,35 +51,9 @@ public class TLB {
          * en
          * la TLB" y se termina la ejecución del método.
          */
-<<<<<<< HEAD
-
-        tiempo.agregarTiempo(2);
-        System.out.println("Buscando la referencia " + referencia + " en la TLB");
-        System.out.println("El tiempo total (busqueda): " + tiempo.getTotal() + " ns");
-=======
->>>>>>> Oficial
         if (tlb.containsKey(referencia)) {
 
-<<<<<<< HEAD
-        /**
-         * Si la referencia no está en la TLB, se imprime el mensaje "Referencia no
-         * encontrada en la TLB" y se procede a buscarla en la TP.
-         * La consulta en la TP suma 30 ns
-         */
-        tiempo.agregarTiempo(30);
-        System.out.println("Referencia " + referencia + " no encontrada en la TLB");
-        System.out.println("El tiempo total (consulta TP): " + tiempo.getTotal() + " ns");
-        Integer ubicacionFisica = tp.buscarReferencia(referencia);
-        /**
-         * Si la TLB no está llena, se agrega la referencia a la TLB.
-         */
-        if (tlb.size() < numEntradas) {
-            tlb.put(referencia, ubicacionFisica);
-            cola.add(referencia);
-        } else {
-=======
             ram.fueReferenciado(tlb.get(referencia));
->>>>>>> Oficial
             /**
              * Poner al final de la cola
              */

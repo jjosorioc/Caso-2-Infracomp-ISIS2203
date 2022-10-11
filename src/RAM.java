@@ -22,31 +22,6 @@ public class RAM {
      * 
      * @param numMarcos
      */
-<<<<<<< HEAD
-    public int buscarReferencia(Integer referencia) {
-        /**
-         * Si la referencia está en la RAM, se imprime el mensaje "Referencia encontrada
-         * en la RAM" y se termina la ejecución del método.
-         */
-        //30ns
-        tiempo.agregarTiempo(30);
-        for (int i = 0; i < marcos.length; i++) {
-            if (marcos[i] == referencia) {
-                System.out.println("Referencia " + referencia + " encontrada en la RAM");
-                System.out.println("Tiempo total (traer datos de la RAM): " + tiempo.getTotal());
-                return i;
-            }
-        }
-        
-
-        /**
-         * Si la referencia no está en la RAM, se imprime el mensaje "Referencia no
-         * encontrada en la RAM" y se procede a buscarla en el disco.
-         * Hacer la busqueda en el disco demora 10ms
-         * 10 ms = 10000000 ns
-         */
-        return -1;
-=======
     public RAM(int numMarcos) {
         this.marcosDirVirtual = new int[numMarcos];
         this.fueReferenciado = new boolean[numMarcos];
@@ -55,20 +30,9 @@ public class RAM {
         for (int i = 0; i < marcosDirVirtual.length; i++) {
             marcosDirVirtual[i] = -1;
         }
->>>>>>> Oficial
     }
 
     public synchronized int agregarReferenciaVirtual(Integer referenciaVirtual) {
-<<<<<<< HEAD
-        tiempo.agregarTiempo(10000000);
-        System.out.println("Tiempo total (Busqueda en Disco): " + tiempo.getTotal());
-        while (cola.size() == marcos.length) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-=======
 
         int marcoDePaginaDisponible = this.ramEstaLlena();
         if (marcoDePaginaDisponible != -1) {
@@ -80,7 +44,6 @@ public class RAM {
             marcosDirVirtual[marcoDePagina] = referenciaVirtual;
             fueReferenciado[marcoDePagina] = true;
             return marcoDePagina;
->>>>>>> Oficial
         }
 
     }

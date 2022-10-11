@@ -35,18 +35,9 @@ public class TP {
          * Para arreglar el fallo de página en la TP se suma otra consulta en la TP
          * 30ns para arreglar el fallo en TP
          */
-<<<<<<< HEAD
-        
-        else {
-            System.out.println("Fallo de página con la referencia " + referencia);
-            tiempo.agregarTiempo(30);
-            System.out.println("Tiempo total (fallo y resolución): " + tiempo.getTotal());
-            int marcoPaginaNuevo = ram.agregarReferenciaVirtual(referencia);
-=======
         else {
 
             int marcoPaginaNuevo = ram.agregarReferenciaVirtual(pagina);
->>>>>>> Oficial
 
             /**
              * Se elimina el marco de página de la TP
