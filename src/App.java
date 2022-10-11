@@ -18,7 +18,7 @@ public class App {
          */
         RAM ram = new RAM(numMarcos);
         TP tp = new TP(numMarcos, ram);
-        TLB tlb = new TLB(numEntradas, tp);
+        TLB tlb = new TLB(numEntradas, tp, ram);
         CargaReferencias cargaReferencias = new CargaReferencias(nombreArchivo, tlb);
         Envejecimiento envejecimiento = new Envejecimiento(ram);
         envejecimiento.start();

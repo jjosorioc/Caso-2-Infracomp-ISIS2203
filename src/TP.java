@@ -13,41 +13,39 @@ public class TP {
     }
 
     /**
-     * Busca la referencia en la TP.
+     * Busca la pagina en la TP.
      * 
-     * @param referencia
+     * @param pagina
      */
-    public int buscarReferencia(Integer referencia) {
+    public int buscarReferencia(Integer pagina) {
 
         /**
-         * Si la referencia está en la TP, se imprime el mensaje "Referencia encontrada
+         * Si la pagina está en la TP, se imprime el mensaje "pagina encontrada
          * en
          * la TP" y se retorna el marco de página.
          */
-        if (array[referencia] != -1) {
-            System.out.println("Referencia " + referencia + " encontrada en la TP");
-            return array[referencia];
+        if (array[pagina] != -1) {
+            ram.fueReferenciado(array[pagina]);
+            return array[pagina]; // Se retorna el marco de pagina correspondiente
         }
 
         /**
          * Ocurre un fallo de página, retorna el marco de página asignado
          */
         else {
-            System.out.println("Fallo de página con la referencia " + referencia);
-            int marcoPaginaNuevo = ram.agregarReferenciaVirtual(referencia);
+
+            int marcoPaginaNuevo = ram.agregarReferenciaVirtual(pagina);
 
             /**
              * Se elimina el marco de página de la TP
              */
             for (int i = 0; i < array.length; i++) {
                 if (array[i] == marcoPaginaNuevo) {
-                    TLB.tlb.remove(i);
-                    TLB.cola.remove(i);
                     array[i] = -1;
                     break;
                 }
             }
-            array[referencia] = marcoPaginaNuevo;
+            array[pagina] = marcoPaginaNuevo;
 
             return marcoPaginaNuevo;
         }
