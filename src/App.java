@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el número de entradas de la TLB: ");
         int numEntradas = Integer.parseInt(sc.nextLine());
@@ -12,13 +13,16 @@ public class App {
         String nombreArchivo = sc.nextLine();
 
         sc.close();
+        
 
         /**
          * Crear los objetos
          */
-        RAM ram = new RAM(numMarcos);
-        TP tp = new TP(numMarcos, ram);
-        TLB tlb = new TLB(numEntradas, tp);
+
+        Tiempo tiempo = new Tiempo(0);
+        RAM ram = new RAM(numMarcos,tiempo);
+        TP tp = new TP(numMarcos, ram, tiempo);
+        TLB tlb = new TLB(numEntradas, tp,tiempo);
         CargaReferencias cargaReferencias = new CargaReferencias(nombreArchivo, tlb);
         Envejecimiento envejecimiento = new Envejecimiento(ram);
         envejecimiento.start();
