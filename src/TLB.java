@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
 public class TLB {
 
     /**
@@ -13,27 +12,31 @@ public class TLB {
     /**
      * Permite saber si una dirección virtual está en la TLB.
      */
-    public static HashMap<Integer, Integer> tlb;
+    private HashMap<Integer, Integer> tlb;
 
     /**
      * Cola para determinar qué dirección virtual debe ser reemplazada.
      */
-    public static Queue<Integer> cola;
+    private Queue<Integer> cola;
 
+    /**
+     * Tabla de páginas
+     */
     private TP tp;
-    private Tiempo tiempo;
+
+    private RAM ram;
 
     /**
      * Constructor de la clase TLB.
      * 
      * @param numEntradas Número de entradas de la TLB.
      */
-    public TLB(int numEntradas, TP tp, Tiempo tiempo) {
+    public TLB(int numEntradas, TP tp, RAM ram) {
         this.numEntradas = numEntradas;
-        TLB.tlb = new HashMap<>();
-        TLB.cola = new LinkedList<>();
+        this.tlb = new HashMap<>();
+        this.cola = new LinkedList<>();
         this.tp = tp;
-        this.tiempo = tiempo;
+        this.ram = ram;
     }
 
     /**
@@ -48,17 +51,16 @@ public class TLB {
          * en
          * la TLB" y se termina la ejecución del método.
          */
+<<<<<<< HEAD
 
         tiempo.agregarTiempo(2);
         System.out.println("Buscando la referencia " + referencia + " en la TLB");
         System.out.println("El tiempo total (busqueda): " + tiempo.getTotal() + " ns");
+=======
+>>>>>>> Oficial
         if (tlb.containsKey(referencia)) {
-            
-            System.out.println("Referencia " + referencia + " encontrada en la TLB");
-            
-            return;
-        }
 
+<<<<<<< HEAD
         /**
          * Si la referencia no está en la TLB, se imprime el mensaje "Referencia no
          * encontrada en la TLB" y se procede a buscarla en la TP.
@@ -75,15 +77,30 @@ public class TLB {
             tlb.put(referencia, ubicacionFisica);
             cola.add(referencia);
         } else {
+=======
+            ram.fueReferenciado(tlb.get(referencia));
+>>>>>>> Oficial
             /**
-             * Si la TLB está llena, se reemplaza la referencia más antigua por la nueva
-             * referencia.
+             * Poner al final de la cola
              */
-            Integer referenciaAntigua = cola.poll();
-            tlb.remove(referenciaAntigua);
-            tlb.put(referencia, ubicacionFisica);
-            cola.add(referencia);
+
+            this.cola.remove(referencia);
+            this.cola.add(referencia);
+            return;
+        } else // Buscar en la TP y agregar a la TLB
+        {
+            int marcoDePagina = tp.buscarReferencia(referencia);
+            if (tlb.size() < numEntradas) {
+                tlb.put(referencia, marcoDePagina);
+                cola.add(referencia);
+            } else {
+                int referenciaReemplazar = cola.poll();
+                tlb.remove(referenciaReemplazar);
+                tlb.put(referencia, marcoDePagina);
+                cola.add(referencia);
+            }
         }
+
     }
 
 }

@@ -2,11 +2,9 @@ public class TP {
     private int[] array = new int[64];
 
     private RAM ram;
-    private Tiempo tiempo;
 
-    public TP(int numMarcos, RAM ram, Tiempo tiempo) {
+    public TP(int numMarcos, RAM ram) {
         this.ram = ram;
-        this.tiempo = tiempo;
         for (int i = 0; i < array.length; i++) {
 
             array[i] = -1; // -1 Indica que no está en la RAM
@@ -15,20 +13,20 @@ public class TP {
     }
 
     /**
-     * Busca la referencia en la TP.
+     * Busca la pagina en la TP.
      * 
-     * @param referencia
+     * @param pagina
      */
-    public int buscarReferencia(Integer referencia) {
+    public int buscarReferencia(Integer pagina) {
 
         /**
-         * Si la referencia está en la TP, se imprime el mensaje "Referencia encontrada
+         * Si la pagina está en la TP, se imprime el mensaje "pagina encontrada
          * en
          * la TP" y se retorna el marco de página.
          */
-        if (array[referencia] != -1) {
-            System.out.println("Referencia " + referencia + " encontrada en la TP");
-            return array[referencia];
+        if (array[pagina] != -1) {
+            ram.fueReferenciado(array[pagina]);
+            return array[pagina]; // Se retorna el marco de pagina correspondiente
         }
 
         /**
@@ -37,25 +35,29 @@ public class TP {
          * Para arreglar el fallo de página en la TP se suma otra consulta en la TP
          * 30ns para arreglar el fallo en TP
          */
+<<<<<<< HEAD
         
         else {
             System.out.println("Fallo de página con la referencia " + referencia);
             tiempo.agregarTiempo(30);
             System.out.println("Tiempo total (fallo y resolución): " + tiempo.getTotal());
             int marcoPaginaNuevo = ram.agregarReferenciaVirtual(referencia);
+=======
+        else {
+
+            int marcoPaginaNuevo = ram.agregarReferenciaVirtual(pagina);
+>>>>>>> Oficial
 
             /**
              * Se elimina el marco de página de la TP
              */
             for (int i = 0; i < array.length; i++) {
                 if (array[i] == marcoPaginaNuevo) {
-                    TLB.tlb.remove(i);
-                    TLB.cola.remove(i);
                     array[i] = -1;
                     break;
                 }
             }
-            array[referencia] = marcoPaginaNuevo;
+            array[pagina] = marcoPaginaNuevo;
 
             return marcoPaginaNuevo;
         }
