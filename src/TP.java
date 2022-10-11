@@ -2,11 +2,9 @@ public class TP {
     private int[] array = new int[64];
 
     private RAM ram;
-    private Tiempo tiempo;
 
-    public TP(int numMarcos, RAM ram, Tiempo tiempo) {
+    public TP(int numMarcos, RAM ram) {
         this.ram = ram;
-        this.tiempo = tiempo;
         for (int i = 0; i < array.length; i++) {
 
             array[i] = -1; // -1 Indica que no está en la RAM
@@ -34,11 +32,8 @@ public class TP {
         /**
          * Ocurre un fallo de página, retorna el marco de página asignado
          */
-        //60ns  
         else {
             System.out.println("Fallo de página con la referencia " + referencia);
-            tiempo.agregarTiempo(60);
-            System.out.println("Tiempo total (fallo y resolución): " + tiempo.getTotal());
             int marcoPaginaNuevo = ram.agregarReferenciaVirtual(referencia);
 
             /**
