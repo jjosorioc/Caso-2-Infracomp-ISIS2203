@@ -38,13 +38,11 @@ public class RAM {
         if (marcoDePaginaDisponible != -1) {
             marcosDirVirtual[marcoDePaginaDisponible] = referenciaVirtual;
             fueReferenciado[marcoDePaginaDisponible] = true;
-            notify();
             return marcoDePaginaDisponible;
         } else { // Si no hay marcos de página disponibles, se debe liberar uno
             int marcoDePagina = this.obtenerMarcoDePagina();
             marcosDirVirtual[marcoDePagina] = referenciaVirtual;
             fueReferenciado[marcoDePagina] = true;
-            notify();
             return marcoDePagina;
         }
 
