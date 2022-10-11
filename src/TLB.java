@@ -52,7 +52,6 @@ public class TLB {
          */
         if (tlb.containsKey(referencia)) {
 
-            System.out.println("Referencia " + referencia + " encontrada en la TLB");
             ram.fueReferenciado(tlb.get(referencia));
             /**
              * Poner al final de la cola
