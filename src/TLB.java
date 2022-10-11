@@ -43,11 +43,12 @@ public class TLB {
      */
     public void buscarReferencia(Integer referencia) {
         /**
+         * Se hace un recorrido en la TLB, su tiempo es de 2ns
          * Si la referencia está en la TLB, se imprime el mensaje "Referencia encontrada
          * en
          * la TLB" y se termina la ejecución del método.
          */
-        //Sumar 2ns
+
         tiempo.agregarTiempo(2);
         System.out.println("Buscando la referencia " + referencia + " en la TLB");
         System.out.println("El tiempo total (busqueda): " + tiempo.getTotal() + " ns");
@@ -61,8 +62,8 @@ public class TLB {
         /**
          * Si la referencia no está en la TLB, se imprime el mensaje "Referencia no
          * encontrada en la TLB" y se procede a buscarla en la TP.
+         * La consulta en la TP suma 30 ns
          */
-        //Sumar 30ns
         tiempo.agregarTiempo(30);
         System.out.println("Referencia " + referencia + " no encontrada en la TLB");
         System.out.println("El tiempo total (consulta TP): " + tiempo.getTotal() + " ns");
