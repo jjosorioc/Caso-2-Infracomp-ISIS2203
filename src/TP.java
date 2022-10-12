@@ -18,6 +18,7 @@ public class TP {
      * @param pagina
      */
     public int buscarReferencia(Integer pagina) {
+        Tiempo.sumarTraduccionDeDirecciones(30);
 
         /**
          * Si la pagina está en la TP, se imprime el mensaje "pagina encontrada
@@ -26,6 +27,7 @@ public class TP {
          */
         if (array[pagina] != -1) {
             ram.fueReferenciado(array[pagina]);
+            Tiempo.sumarCargaDeDatos(30);
             return array[pagina]; // Se retorna el marco de pagina correspondiente
         }
 
@@ -39,6 +41,9 @@ public class TP {
 
             int marcoPaginaNuevo = ram.agregarReferenciaVirtual(pagina);
 
+            Tiempo.sumarTraduccionDeDirecciones(30);
+            Tiempo.sumarCargaDeDatos(10000000);
+            Tiempo.sumarCargaDeDatos(30);
             /**
              * Se elimina el marco de página de la TP
              */

@@ -2,30 +2,34 @@ public class Tiempo {
 
     /**
      * Lo de los tiempos es:
-        Consulta TLB +2 ns
-        Consulta TP +30 ns
-        Si está en la RAM:
-            Carga RAM +30 ns
-        Si no está en la RAM:
-            Hay fallo:
-                Resuelve en la TP +30 ns
-                Busqueda en el disco +10000000 ns
-        */
+     * Consulta TLB +2 ns
+     * Consulta TP +30 ns
+     * Si está en la RAM:
+     * Carga RAM +30 ns
+     * Si no está en la RAM:
+     * Hay fallo:
+     * Resuelve en la TP +30 ns
+     * Busqueda en el disco +10000000 ns
+     */
 
-    private long total;
+    private static long cargaDeDatos = 0;
 
-    public Tiempo(long total) {
-        this.total = total;
+    private static long traduccionDeDirecciones = 0;
+
+    public synchronized static void sumarCargaDeDatos(int cantidadNS) {
+        Tiempo.cargaDeDatos += cantidadNS;
     }
 
-    //El tiempo que se agrega está en ns
-    public void agregarTiempo(long tiempo) {
-        total += tiempo;
+    public synchronized static void sumarTraduccionDeDirecciones(int cantidadNS) {
+        Tiempo.traduccionDeDirecciones += cantidadNS;
     }
 
-    //Getter y setter
-    public long getTotal() {
-        return total;
+    public static long getCargaDeDatos() {
+        return Tiempo.cargaDeDatos;
     }
-    
+
+    public static long getTraduccionDeDirecciones() {
+        return Tiempo.traduccionDeDirecciones;
+    }
+
 }

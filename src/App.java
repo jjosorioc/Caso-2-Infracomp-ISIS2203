@@ -24,5 +24,11 @@ public class App {
         envejecimiento.start();
         cargaReferencias.start();
 
+        cargaReferencias.join();
+        envejecimiento.join();
+
+        System.out.println("Tiempo de carga de datos: " + Tiempo.getCargaDeDatos() + " ns");
+        System.out.println("Tiempo de traducción de direcciones: " + Tiempo.getTraduccionDeDirecciones() + " ns");
+
     }
 }

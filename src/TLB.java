@@ -53,6 +53,9 @@ public class TLB {
          */
         if (tlb.containsKey(referencia)) {
 
+            Tiempo.sumarTraduccionDeDirecciones(2);
+            Tiempo.sumarCargaDeDatos(30);
+
             ram.fueReferenciado(tlb.get(referencia));
             /**
              * Poner al final de la cola
