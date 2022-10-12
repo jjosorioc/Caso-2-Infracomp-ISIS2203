@@ -17,7 +17,7 @@ public class App {
          * Crear los objetos
          */
         RAM ram = new RAM(numMarcos);
-        TP tp = new TP(numMarcos, ram);
+        TP tp = new TP(ram);
         TLB tlb = new TLB(numEntradas, tp, ram);
         CargaReferencias cargaReferencias = new CargaReferencias(nombreArchivo, tlb);
         Envejecimiento envejecimiento = new Envejecimiento(ram);

@@ -3,7 +3,7 @@ public class TP {
 
     private RAM ram;
 
-    public TP(int numMarcos, RAM ram) {
+    public TP(RAM ram) {
         this.ram = ram;
         for (int i = 0; i < array.length; i++) {
 
