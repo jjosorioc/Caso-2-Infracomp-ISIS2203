@@ -57,12 +57,6 @@ public class TLB {
             Tiempo.sumarCargaDeDatos(30);
 
             ram.fueReferenciado(tlb.get(referencia));
-            /**
-             * Poner al final de la cola
-             */
-
-            this.cola.remove(referencia);
-            this.cola.add(referencia);
             return;
         } else // Buscar en la TP y agregar a la TLB
         {
