@@ -83,6 +83,7 @@ public class RAM {
             if (fueReferenciado[i]) // Si fue referenciado, shift y agregas 1
             {
                 referencias[i] = (referencias[i] << 1 ^ 1);
+                fueReferenciado[i] = false;
             } else {
                 referencias[i] = referencias[i] << 0 ^ 0;
             }
