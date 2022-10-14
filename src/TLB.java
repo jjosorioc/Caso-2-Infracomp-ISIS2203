@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class TLB {
 
@@ -12,12 +11,12 @@ public class TLB {
     /**
      * Permite saber si una dirección virtual está en la TLB.
      */
-    private HashMap<Integer, Integer> tlb;
+    public HashMap<Integer, Integer> tlb;
 
     /**
      * Cola para determinar qué dirección virtual debe ser reemplazada.
      */
-    private Queue<Integer> cola;
+    private LinkedList<Integer> cola;
 
     /**
      * Tabla de páginas
@@ -61,10 +60,42 @@ public class TLB {
         } else // Buscar en la TP y agregar a la TLB
         {
             int marcoDePagina = tp.buscarReferencia(referencia);
+
+            /**
+             * Eliminar de la TLB
+             */
+            Integer paginaVieja = -1;
+            for (Integer i : tlb.keySet()) {
+                if (tlb.get(i) == marcoDePagina) {
+                    tlb.remove(i);
+                    paginaVieja = i;
+                    break;
+                }
+            }
+
+            /**
+             * Eliminar de la cola
+             */
+            int index = 0;
+            while (index < cola.size() && paginaVieja != -1) {
+                if (cola.get(index) == paginaVieja) {
+                    cola.remove(index);
+                    break;
+                }
+                index++;
+            }
+
+            /**
+             * Si la TLB no está llena, se agrega la nueva referencia.
+             */
             if (tlb.size() < numEntradas) {
                 tlb.put(referencia, marcoDePagina);
                 cola.add(referencia);
             } else {
+                /**
+                 * Si la TLB está llena, se elimina la referencia más antigua y se agrega la
+                 * nueva.
+                 */
                 int referenciaReemplazar = cola.poll();
                 tlb.remove(referenciaReemplazar);
                 tlb.put(referencia, marcoDePagina);
