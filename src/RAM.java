@@ -85,7 +85,7 @@ public class RAM {
                 referencias[i] = (referencias[i] << 1 ^ 1);
                 fueReferenciado[i] = false;
             } else {
-                referencias[i] = referencias[i] << 0 ^ 0;
+                referencias[i] = referencias[i] << 1 ^ 0;
             }
         }
 
