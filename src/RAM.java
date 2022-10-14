@@ -82,10 +82,12 @@ public class RAM {
         for (int i = 0; i < fueReferenciado.length; i++) {
             if (fueReferenciado[i]) // Si fue referenciado, shift y agregas 1
             {
-                referencias[i] = (referencias[i] << 1 ^ 1);
+                int a = referencias[i] >> 1;
+                String conUno = "1" + Integer.toBinaryString(a);
+                referencias[i] = Integer.parseInt(conUno, 2);
                 fueReferenciado[i] = false;
             } else {
-                referencias[i] = referencias[i] << 1 ^ 0;
+                referencias[i] = referencias[i] >> 1;
             }
         }
 
