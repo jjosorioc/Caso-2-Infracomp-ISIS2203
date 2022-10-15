@@ -7,11 +7,6 @@ public class RAM {
     private int[] marcosDirVirtual;
 
     /**
-     * Arreglo que indica si un marco fue referenciado
-     */
-    private boolean[] fueReferenciado;
-
-    /**
      * Arreglo que indica si un marco fue referenciado. Este se utiliza para saber
      * qué marco liberar.
      */
@@ -24,7 +19,6 @@ public class RAM {
      */
     public RAM(int numMarcos) {
         this.marcosDirVirtual = new int[numMarcos];
-        this.fueReferenciado = new boolean[numMarcos];
         this.referencias = new int[numMarcos];
 
         for (int i = 0; i < marcosDirVirtual.length; i++) {
@@ -37,12 +31,12 @@ public class RAM {
         int marcoDePaginaDisponible = this.ramEstaLlena();
         if (marcoDePaginaDisponible != -1) {
             marcosDirVirtual[marcoDePaginaDisponible] = referenciaVirtual;
-            fueReferenciado[marcoDePaginaDisponible] = true;
+            this.fueReferenciado(marcoDePaginaDisponible);
             return marcoDePaginaDisponible;
         } else { // Si no hay marcos de página disponibles, se debe liberar uno
             int marcoDePagina = this.obtenerMarcoDePagina();
             marcosDirVirtual[marcoDePagina] = referenciaVirtual;
-            fueReferenciado[marcoDePagina] = true;
+            this.fueReferenciado(marcoDePagina);
             return marcoDePagina;
         }
 
@@ -79,16 +73,9 @@ public class RAM {
 
     public synchronized void envejecimiento() {
 
-        for (int i = 0; i < fueReferenciado.length; i++) {
-            if (fueReferenciado[i]) // Si fue referenciado, shift y agregas 1
-            {
-                int a = referencias[i] >> 1;
-                String conUno = "1" + Integer.toBinaryString(a);
-                referencias[i] = Integer.parseInt(conUno, 2);
-                fueReferenciado[i] = false;
-            } else {
-                referencias[i] = referencias[i] >> 1;
-            }
+        for (int i = 0; i < referencias.length; i++) {
+
+            referencias[i] = referencias[i] >> 1;
         }
 
     }
@@ -99,6 +86,6 @@ public class RAM {
      * @param marco
      */
     public void fueReferenciado(Integer marco) {
-        fueReferenciado[marco] = true;
+        referencias[marco] = referencias[marco] | (int) Math.pow(2, 30);
     }
 }
