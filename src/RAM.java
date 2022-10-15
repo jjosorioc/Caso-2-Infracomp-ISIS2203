@@ -85,7 +85,7 @@ public class RAM {
      * 
      * @param marco
      */
-    public void fueReferenciado(Integer marco) {
+    public synchronized void fueReferenciado(Integer marco) {
         referencias[marco] = referencias[marco] | (int) Math.pow(2, 30);
     }
 }
