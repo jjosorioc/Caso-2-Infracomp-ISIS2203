@@ -21,8 +21,8 @@ public class App {
         TLB tlb = new TLB(numEntradas, tp, ram);
         CargaReferencias cargaReferencias = new CargaReferencias(nombreArchivo, tlb);
         Envejecimiento envejecimiento = new Envejecimiento(ram);
-        envejecimiento.start();
         cargaReferencias.start();
+        envejecimiento.start();
 
         cargaReferencias.join();
         envejecimiento.join();

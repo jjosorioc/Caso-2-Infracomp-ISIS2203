@@ -16,11 +16,11 @@ public class Tiempo {
 
     private static long traduccionDeDirecciones = 0;
 
-    public synchronized static void sumarCargaDeDatos(int cantidadNS) {
+    public static void sumarCargaDeDatos(int cantidadNS) {
         Tiempo.cargaDeDatos += cantidadNS;
     }
 
-    public synchronized static void sumarTraduccionDeDirecciones(int cantidadNS) {
+    public static void sumarTraduccionDeDirecciones(int cantidadNS) {
         Tiempo.traduccionDeDirecciones += cantidadNS;
     }
 

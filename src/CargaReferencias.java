@@ -37,6 +37,7 @@ public class CargaReferencias extends Thread {
 
         } catch (Exception e) {
             System.err.println("No se encontró el archivo '" + nombreArchivo + "' en la carpeta 'ej_paginas'!");
+            System.exit(1);
         }
 
     }
