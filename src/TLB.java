@@ -11,7 +11,7 @@ public class TLB {
     /**
      * Permite saber si una dirección virtual está en la TLB.
      */
-    public HashMap<Integer, Integer> tlb;
+    private HashMap<Integer, Integer> tlb;
 
     /**
      * Cola para determinar qué dirección virtual debe ser reemplazada.
